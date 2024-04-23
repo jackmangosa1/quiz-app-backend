@@ -6,14 +6,19 @@ import com.auca.quizapp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/quiz")
 public class QuizController {
     @Autowired
     private QuizService quizService;
+
+    private static final Logger logger = LoggerFactory.getLogger(QuizController.class);
 
 
     @GetMapping("/all")
@@ -48,6 +53,12 @@ public class QuizController {
 
     @GetMapping("/{quizId}/questions")
     public ResponseEntity<List<Question>> getQuestionsForQuiz(@PathVariable Integer quizId) {
+        logger.info("Starting quiz with quiz ID: {}", quizId);
         return quizService.getQuestionsForQuiz(quizId);
+    }
+
+    @GetMapping("/{quizId}")
+    public ResponseEntity<Quiz> getQuizById(@PathVariable Integer quizId) {
+        return quizService.getQuizById(quizId);
     }
 }

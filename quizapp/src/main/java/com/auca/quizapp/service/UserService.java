@@ -22,13 +22,18 @@ public class UserService {
         return userDao.save(user);
     }
 
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         User user = userDao.findByUsername(username);
-        if (user != null) {
-            return passwordEncoder.matches(password, user.getPassword());
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            return user;
         }
-        return false;
+        return null;
     }
+
+    public User getUserById(Long id) {
+        return userDao.findById(id).orElse(null);
+    }
+
 
 
 

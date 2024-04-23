@@ -18,4 +18,8 @@ public class AttemptService {
         attemptDao.save(attempt);
         return score;
     }
+
+    public void saveAttempt(Attempt attempt) {
+        attemptDao.save(attempt);
+    }
 }

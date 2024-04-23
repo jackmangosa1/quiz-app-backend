@@ -119,5 +119,14 @@ public class QuizService {
         }
     }
 
+    public ResponseEntity<Quiz> getQuizById(Integer quizId) {
+        Quiz quiz = quizDao.findById(quizId).orElse(null);
+        if (quiz != null) {
+            return new ResponseEntity<>(quiz, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }

@@ -8,12 +8,14 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
+    private  String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -21,4 +23,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Attempt> attempts;
+
+    public User() {
+        this.role = Role.USER;
+    }
 }

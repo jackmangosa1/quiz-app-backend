@@ -1,4 +1,5 @@
 package com.auca.quizapp.service;
+
 import com.auca.quizapp.dao.QuizDao;
 import com.auca.quizapp.model.Question;
 import com.auca.quizapp.model.Quiz;
@@ -6,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
 
+@Service
 public class ScoreCalculationService {
     @Autowired
     private QuizDao quizDao;
@@ -21,7 +22,7 @@ public class ScoreCalculationService {
         List<Question> questions = quiz.getQuestions();
         for (int i = 0; i < questions.size(); i++) {
             Question question = questions.get(i);
-            if (question.getRightAnswer().equals(userAnswers.get(i))) {
+            if (userAnswers.get(i).equals(question.getRightAnswer())) {
                 score++;
             }
         }
